@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>raspimouse_slam</name>
+    <version>0.0.0</version>
+    <description>The raspimouse_slam package</description>
+    <maintainer email="??">??</maintainer>
+    <license>Apache License 2.0</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    
+    <exec_depend>map_server</exec_depend>
+    <exec_depend>gmapping</exec_depend>
+    <exec_depend>urg_node</exec_depend>
+    <exec_depend>hls_lfcd_lds_driver</exec_depend>
+
+    <export>
+    </export>
+</package>
