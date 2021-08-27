@@ -41,9 +41,9 @@
         <node name="lidar_node" pkg="rplidar_ros" type="rplidarNode" required="true" >
             <param name="serial_port" value="$(arg port)" />
             <param name="frame_id" value="$(arg laser_frame_id)" />
-        </include>
+        </node>
         <node pkg="tf" type="static_transform_publisher" name="laser_broadcaster"
             args="0 0 0.01 0 3.14 3.14 base_link $(arg laser_frame_id) 100" />
     </group>
-    
+
 </launch>
