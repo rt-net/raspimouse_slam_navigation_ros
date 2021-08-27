@@ -3,9 +3,9 @@ map_type: costmap
 obstacle_range: 2.0
 raytrace_range: 2.5
 publish_voxel_map: true
-observation_sources: laser
+observation_sources: laser_scan
 laser_scan:
-  sensor_frame: laser
+  sensor_frame: base_link
   data_type: LaserScan
   topic: scan
   marking: true
