@@ -16,7 +16,7 @@ global_costmap:
 
   static_layer:
     map_topic: /map
-    map_type: costmap
+    # map_type: costmap
     track_unknown_space: false
     subscribe_to_updates: true
 
