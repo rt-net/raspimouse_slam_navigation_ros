@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="rviz_config" default="$(find raspimouse_navigation)/rviz/raspimouse_move_base.rviz" />
+  
+  <node name="rviz" pkg="rviz" type="rviz" respawn="false"
+    args="-d $(arg rviz_config)" output="screen" required="true" />
+</launch>

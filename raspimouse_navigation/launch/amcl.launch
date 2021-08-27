@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="amcl" type="amcl" name="amcl" output="screen">
+    <!-- Basic params -->
+    <param name="odom_model_type" value="diff-corrected" />
+    <param name="odom_frame_id" value="odom" />
+    <param name="base_frame_id" value="base_footprint" />
+    <param name="global_frame_id" value="map" />
+    <param name="use_map_topic" value="true" />
+    <param name="gui_publish_rate" value="10.0" /> <!-- Hz -->
+
+    <!-- Update and resample params -->
+    <param name="update_min_d" value="0.2" /> <!-- Meters -->
+    <param name="update_min_a" value="0.5" /> <!-- Radians -->
+    <param name="resample_interval" value="1" /> <!-- Number of filter updates before resampling -->
+
+    <!-- Localization params -->
+    <param name="transform_tolerance" value="0.2" /> <!-- Seconds -->
+    <param name="kld_err" value="0.05" /> <!-- Maximum error between the true distribution and the estimated distribution -->
+    <param name="kld_z" value="0.99" />
+      <!-- Upper standard normal quantile for (1 - p) -->
+      <!-- p is the probability that the error on the estimated distribution will be less than kld_err -->
+
+    <!-- Recover related params -->
+    <param name="recovery_alpha_slow" value="0.0" /> <!-- disabled when 0.0, used when deciding when to recover by adding random poses -->
+    <param name="recovery_alpha_fast" value="0.0" /> <!-- disabled when 0.0, used when deciding when to recover by adding random poses -->
+    <!-- When are these reset params used?? 
+    <param name="reset_th_alpha" value="3.0"/> 
+    <param name="reset_th_cov" value="0.1"/>  -->
+
+    <!-- Odometry noise params -->
+    <param name="odom_alpha1" value="0.6"/>  <!-- expected noise in rotation estimate from the rotation -->
+    <param name="odom_alpha2" value="0.1"/>  <!-- expected noise in rotation estimate from the translation -->
+    <param name="odom_alpha3" value="0.3"/>  <!-- expected noise in translation estimate from the translation -->
+    <param name="odom_alpha4" value="0.5"/>  <!-- expected noise in translation estimate from the rotation -->
+
+    <!-- Laser related params -->
+    <param name="min_particles" value="100" />  <!-- Minimum allowed particles -->
+    <param name="max_particles" value="500" />  <!-- Maximum allowed particles -->
+    <param name="laser_min_range" value="-1.0" /> <!-- Minimum scan range to be considered. -1.0 will cause the laser's reported minimum range to be used -->
+    <param name="laser_max_range" value="-1.0" /> <!-- Maximum scan range to be considered. -1.0 will cause the laser's reported maximum range to be used -->
+    <param name="laser_max_beams" value="100" /> <!-- How many evenly-spaced beams in each scan to be used when updating the filter -->
+    <param name="laser_model_type" value="likelihood_field"/> <!-- Use either beam, likelihood_field or likelihood_field_prob -->
+    <param name="laser_likelihood_max_dist" value="2.0"/> <!-- Meters, Maximum distance to do obstacle inflation on map -->
+    <param name="laser_sigma_hit" value="0.2"/> <!-- Standard deviation for Gaussian model used in z_hit part of the model -->
+    <param name="laser_lambda_short" value="0.1"/> <!-- Relates to z_short part -->
+    <!-- The z params are mixture weights -->
+    <!-- These z params should sum to 1 -->
+    <!-- If likelihood_field model is used, use z_hit and z_rand -->
+    <!-- If beam model is used, use all four -->
+    <param name="laser_z_hit" value="0.5"/>
+    <param name="laser_z_rand" value="0.5"/>
+    <!-- <param name="laser_z_short" value="0.05"/>
+    <param name="laser_z_max" value="0.05"/> -->
+
+  </node>
+</launch>

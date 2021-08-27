@@ -1,0 +1,17 @@
+shutdown_costmaps: True
+
+controller_frequency: 10.0    # Hz 
+controller_patience: 15.0     # Seconds
+
+planner_frequency: 5          # Hz
+planner_patience: 20          # Seconds
+
+oscillation_timeout: 0.0
+oscillation_distance: 0.5
+
+#clearing_go_forward_allowed: False 
+recovery_behavior_enabled: False
+clearing_rotation_allowed: False 
+
+base_local_planner: "base_local_planner/TrajectoryPlannerROS"
+#base_local_planner: "dwa_local_planner/DWAPlannerROS"
