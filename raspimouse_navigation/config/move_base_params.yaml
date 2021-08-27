@@ -1,9 +1,9 @@
 shutdown_costmaps: True
 
-controller_frequency: 10.0    # Hz 
+controller_frequency: 2.0    # Hz 
 controller_patience: 15.0     # Seconds
 
-planner_frequency: 5          # Hz
+planner_frequency: 2          # Hz
 planner_patience: 20          # Seconds
 
 oscillation_timeout: 0.0
