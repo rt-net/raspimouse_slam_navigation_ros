@@ -1,6 +1,6 @@
 # raspimouse_slam_navigation
 ## Requirements
-以下の表に使用しているOSやROSのバージョンを示す  
+以下の表に使用しているOSやROSのバージョンを示します。  
 開発PCも必要だよって書いておく？？
 |名称|バージョン|
 |----|----|
@@ -9,14 +9,14 @@
 |Raspberry Pi|3B|
 |RaspberryPi OS|nandakke|
 
-また、本パッケージでは以下の機材を使用している  
+また、本パッケージでは以下の機材を使用しています。（ここは該当パッケージに書くのでも良さそう）  
 |種類|名称|
 |----|----|
 |ゲームパッド|Logicool F710|
 |レーザ測域センサ|RPLIDAR|
 
 ## Installation
-以下のコマンドを実行してインストールを行う。
+以下のコマンドを実行してインストールを行います。
 ```sh
 cd ~/ros_ws/src
 # Clone the ROS packages
@@ -32,27 +32,43 @@ catkin source
 ```
 
 ## SLAM
-Create map using RPLIDAR and F710.
-```sh
-ROBOT$ roslaunch raspimouse_ros_examples mouse_with_lidar.launch rplidar:=true port:=/dev/ttyUSB0
-ROBOT$ roslaunch raspimouse_ros_examples teleop.launch mouse:=false joy:=true joyconfig:=f710
-PC$ roslaunch raspimouse_slam raspimouse_slam.launch rplidar:=true
-```
-Move around... A map should appear on RViz.
+画像があると良さそう  
+LIDARを使ってSLAM（自己位置推定と地図生成）を行うパッケージです。
+### Requirements
+書くこと
+ * 対応しているLIDAR
+ * 対応しているコントローラ
 
-Save the map
+Raspberry Pi Mouse上で、次のコマンドを実行します。LIDARなどを起動します。
 ```sh
-PC$ cd ~/ros_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps
-PC$ rosrun map_server map_saver -f <MAP_NAME>
+roslaunch raspimouse_ros_examples mouse_with_lidar.launch rplidar:=true port:=/dev/ttyUSB0
 ```
 
-Then, there should be two files. `pgm` and `yaml`
+Raspberry Pi Mouse上で、次のコマンドを実行します。ゲームパッドで制御することができます。
 ```sh
-maps$ ls
+roslaunch raspimouse_ros_examples teleop.launch mouse:=false joy:=true joyconfig:=f710
+```
+
+次のコマンドを実行して、SLAMを開始します。開発用PC側で起動することを推奨します。この時、開発用PCとRaspberry Pi Mouseが同じROS Master下にいる必要があります。
+```sh
+roslaunch raspimouse_slam raspimouse_slam.launch rplidar:=true
+```
+
+RVizが立ち上がり、Raspberry Pi Mouseを動かすと地図が構築されていく様子が見れます。
+
+地図の保存には次のROSノードを実行します。開発用PC側で起動することを推奨します。
+```sh
+cd ~/ros_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps
+rosrun map_server map_saver -f <MAP_NAME>
+```
+
+`pgm`と`yaml`の2つのファイルが生成されています。
+```sh
+~/ros_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps$ ls
 <MAP_NAME>.pgm <MAP_NAME>.yaml
 ```
 
-Close all ROS nodes.
+地図の確認ができたら、起動しているROSノードを全て終了します。
 
 ## Navigation
 This package uses amcl and move_base.
