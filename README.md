@@ -31,14 +31,16 @@ catkin build
 catkin source
 ```
 
-## SLAM
+## raspimouse_slam
 画像があると良さそう  
 LIDARを使ってSLAM（自己位置推定と地図生成）を行うパッケージです。
+
 ### Requirements
 書くこと
  * 対応しているLIDAR
  * 対応しているコントローラ
 
+### Usage
 Raspberry Pi Mouse上で、次のコマンドを実行します。LIDARなどを起動します。
 ```sh
 roslaunch raspimouse_ros_examples mouse_with_lidar.launch rplidar:=true port:=/dev/ttyUSB0
@@ -70,13 +72,28 @@ rosrun map_server map_saver -f <MAP_NAME>
 
 地図の確認ができたら、起動しているROSノードを全て終了します。
 
-## Navigation
-This package uses amcl and move_base.
-The example below uses RPLIDAR.
+## raspimouse_navigation
+画像があるといいよね
+このパッケージはamclとmove_baseを利用しています。予め作られた地図と周辺環境の情報から自己位置推定を行い、地図上の任意の座標まで自律移動を行うことができます。
+
+### Requirements
+LIDARと開発PC  
+ここではRPLIDARを使っているです。LDSにも対応したのは確認できた。URGはまだ。
+
+### Usage
+画像入れつつ起動する手順とか示しましょう〜  
+
+Raspberry Pi Mouse上で、次のコマンドを実行します。Raspberry Pi MouseのモータとLIDARを起動するためのノードを起動しています。
 ```sh
-ROBOT$ roslaunch raspimouse_navigation robot_navigation.launch rplidar:=true
-PC$ roslaunch raspimouse_navigation pc_navigation.launch
+roslaunch raspimouse_navigation robot_navigation.launch rplidar:=true
 ```
+
+開発用のパソコン上で、次のコマンドを実行します。自己位置推定と経路生成用のノードを起動し、RVizを立ち上げます。
+```sh
+roslaunch raspimouse_navigation pc_navigation.launch
+```
+
+まだ書いてねー、RVizのスクショとかも貼ってねー
 
 # License
 このリポジトリは？？ライセンスの元、公開されています。ライセンスについては[LICENSE](hoge)をご参照ください。
