@@ -1,0 +1,8 @@
+# MacOS metadata file
+.DS_Store
+
+# Catkin custom files
+CATKIN_IGNORE
+
+# Swap files
+*.swp
