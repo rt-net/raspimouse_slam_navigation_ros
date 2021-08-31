@@ -61,3 +61,6 @@ The example below uses RPLIDAR.
 ROBOT$ roslaunch raspimouse_navigation robot_navigation.launch rplidar:=true
 PC$ roslaunch raspimouse_navigation pc_navigation.launch
 ```
+
+# License
+このリポジトリは？？ライセンスの元、公開されています。ライセンスについては[LICENSE](hoge)をご参照ください。
