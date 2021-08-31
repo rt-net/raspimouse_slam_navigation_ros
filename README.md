@@ -1,5 +1,35 @@
 # raspimouse_slam_navigation
-Make sure you are working on ROS Melodic.
+## Requirements
+以下の表に使用しているOSやROSのバージョンを示す  
+開発PCも必要だよって書いておく？？
+|名称|バージョン|
+|----|----|
+|Ubuntu|18.04|
+|ROS|Melodic|
+|Raspberry Pi|3B|
+|RaspberryPi OS|nandakke|
+
+また、本パッケージでは以下の機材を使用している  
+|種類|名称|
+|----|----|
+|ゲームパッド|Logicool F710|
+|レーザ測域センサ|RPLIDAR|
+
+## Installation
+以下のコマンドを実行してインストールを行う。
+```sh
+cd ~/ros_ws/src
+# Clone the ROS packages
+git clone https://github.com/ryuichiueda/raspimouse_ros_2
+git clone -b melodic-devel https://github.com/rt-net/raspimouse_ros_examples
+git clone -b feature/support-melodic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
+# Install dependencies
+rosdep install -r -y --from-paths . --ignore-src
+
+# make and install
+catkin build
+catkin source
+```
 
 ## SLAM
 Create map using RPLIDAR and F710.
