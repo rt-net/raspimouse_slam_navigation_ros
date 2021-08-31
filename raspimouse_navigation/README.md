@@ -1,5 +1,4 @@
 # raspimouse_navigation
-
-## How to install
-
-## How to execute
+書くこと  
+・パラメータについては別ページへ案内（amclとmove_baseそれぞれのROSWiki?）  
+・パッケージの概要
