@@ -97,4 +97,4 @@ roslaunch raspimouse_navigation pc_navigation.launch
 まだ書いてねー、RVizのスクショとかも貼ってねー
 
 # License
-このリポジトリは？？ライセンスの元、公開されています。ライセンスについては[LICENSE](hoge)をご参照ください。
+このリポジトリはApache License Version 2.0 ライセンスの元、公開されています。ライセンスについては[LICENSE](./LICENSE)をご参照ください。
