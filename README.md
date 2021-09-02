@@ -7,7 +7,6 @@
 |Ubuntu|18.04|
 |ROS|Melodic|
 |Raspberry Pi|3B|
-|RaspberryPi OS|nandakke|
 
 また、本パッケージでは以下の機材を使用しています。（ここは該当パッケージに書くのでも良さそう）  
 |種類|名称|
@@ -22,21 +21,23 @@ cd ~/ros_ws/src
 # Clone the ROS packages
 git clone https://github.com/ryuichiueda/raspimouse_ros_2
 git clone -b melodic-devel https://github.com/rt-net/raspimouse_ros_examples
-git clone -b feature/support-melodic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
+git clone -b melodic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
 # Install dependencies
 rosdep install -r -y --from-paths . --ignore-src
 
 # make and install
-catkin build
-catkin source
+cd ~/ros_ws
+catkin_make
+source ~/ros_ws/deve/setup.bash
 ```
 
 ## raspimouse_slam
 画像があると良さそう  
 LIDARを使ってSLAM（自己位置推定と地図生成）を行うパッケージです。
 
-### Requirements
+### Used devices
 書くこと
+ * 開発PC使ってる
  * 対応しているLIDAR
  * 対応しているコントローラ
 
@@ -76,7 +77,7 @@ rosrun map_server map_saver -f <MAP_NAME>
 画像があるといいよね
 このパッケージはamclとmove_baseを利用しています。予め作られた地図と周辺環境の情報から自己位置推定を行い、地図上の任意の座標まで自律移動を行うことができます。
 
-### Requirements
+### Used devices
 LIDARと開発PC  
 ここではRPLIDARを使っているです。LDSにも対応したのは確認できた。URGはまだ。
 
