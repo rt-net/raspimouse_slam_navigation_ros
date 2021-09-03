@@ -1,4 +1,14 @@
 # raspimouse_slam_navigation
+Raspberry Pi Mouse用にSLAMとナビゲーションのROSパッケージのメタパッケージです。
+
+---
+# Table of Concents
+ - [Requirements](#Requirements)
+ - [Installation](#Installation)
+ - [QuickStart](#QuickStart)
+---
+
+<a name="Requirements"></a>
 ## Requirements
 以下の表に使用しているOSやROSのバージョンを示します。  
 開発PCも必要だよって書いておく？？
@@ -11,9 +21,10 @@
 また、本パッケージでは以下の機材を使用しています。（ここは該当パッケージに書くのでも良さそう）  
 |種類|名称|
 |----|----|
-|ゲームパッド|Logicool F710|
-|レーザ測域センサ|RPLIDAR|
+|ゲームパッド|Logicool F710, Dualshock3|
+|レーザ測域センサ|RPLIDAR, LDS-01|
 
+<a name="Installation"></a>
 ## Installation
 以下のコマンドを実行してインストールを行います。
 ```sh
@@ -29,6 +40,29 @@ rosdep install -r -y --from-paths . --ignore-src
 cd ~/ros_ws
 catkin_make
 source ~/ros_ws/deve/setup.bash
+```
+
+<a name="QuickStart"></a>
+## QuickStart
+無事インストールが完了したら、以下の一連のコマンドを実行しましょう。SLAMで地図生成を行い、作った地図を利用してナビゲーションを行うことができます。それぞれの詳しい動かし方などについては[SLAM](#slam)、[ナビゲーション](#navigation)を参照してください。  
+ここでは例として、ゲームパッドのLogicool F710とレーザ測域センサのRPLIDAR A1
+```sh
+# SLAMで地図生成
+## ロボット側で以下の2つのコマンドを実行
+roslaunch raspimouse_ros_examples mouse_with_lidar.launch rplidar:=true port:=/dev/ttyUSB0
+roslaunch raspimouse_ros_examples teleop.launch mouse:=false joy:=true joyconfig:=f710
+## PC側で次のコマンドを実行実行
+roslaunch raspimouse_slam raspimouse_slam.launch rplidar:=true
+## 地図ができたら引き続きPC側で実行
+cd ~/ros_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps
+rosrun map_server map_saver -f <MAP_NAME>
+
+# ナビゲーション
+## ロボット側で次のコマンドを実行
+roslaunch raspimouse_navigation robot_navigation.launch rplidar:=true
+## PC側で次のコマンドを実行
+roslaunch raspimouse_navigation pc_navigation.launch　map_file:=$(find raspimouse_slam)/maps/<MAP_NAME>.yaml
+## RVizが立ち上がるのでそこで操作してみましょう
 ```
 
 ## raspimouse_slam
@@ -89,9 +123,9 @@ Raspberry Pi Mouse上で、次のコマンドを実行します。Raspberry Pi M
 roslaunch raspimouse_navigation robot_navigation.launch rplidar:=true
 ```
 
-開発用のパソコン上で、次のコマンドを実行します。自己位置推定と経路生成用のノードを起動し、RVizを立ち上げます。
+開発用のパソコン上で、次のコマンドを実行します。自己位置推定と経路生成用のノードを起動し、RVizを立ち上げます。`map_file`パラメータがあるので、随時環境に合わせて変更をしてください・
 ```sh
-roslaunch raspimouse_navigation pc_navigation.launch
+roslaunch raspimouse_navigation pc_navigation.launch　map_file:=$(find raspimouse_slam)/maps/<MAP_NAME>.yaml
 ```
 
 まだ書いてねー、RVizのスクショとかも貼ってねー
