@@ -1,4 +1,5 @@
 # raspimouse_slam
-書くこと  
-・パラメータについては別ページへ案内（amclとmove_baseそれぞれのROSWiki?）  
-・パッケージの概要
+Raspberry Pi MouseでSLAMをするためのパッケージです。
+
+パラメータに関しては該当のROSのWikiを参照してください。
+ - [gmapping](https://wiki.ros.org/gmapping?distro=melodic#Parameters)
