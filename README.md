@@ -1,28 +1,49 @@
 # raspimouse_slam_navigation
-Raspberry Pi Mouse用にSLAMとナビゲーションのROSパッケージのメタパッケージです。
+Raspberry Pi MouseでSLAMやナビゲーションを行うためのROSメタパッケージです。
 
 ---
 # Table of Concents
  - [Requirements](#Requirements)
  - [Installation](#Installation)
  - [QuickStart](#QuickStart)
+ - [raspimouse_slam](#SLAM)
+ - [raspimouse_navigation](#Navigation)
+ - [License](#License)
 ---
 
 <a name="Requirements"></a>
 ## Requirements
-以下の表に使用しているOSやROSのバージョンを示します。  
-開発PCも必要だよって書いておく？？
-|名称|バージョン|
-|----|----|
-|Ubuntu|18.04|
-|ROS|Melodic|
-|Raspberry Pi|3B|
+Raspberry Pi Mouse V3と開発PCを用意しましょう。以下のリストは、必要なソフトや対応しているセンサなどの一覧を示します。  
 
-また、本パッケージでは以下の機材を使用しています。（ここは該当パッケージに書くのでも良さそう）  
-|種類|名称|
-|----|----|
-|ゲームパッド|Logicool F710, Dualshock3|
-|レーザ測域センサ|RPLIDAR, LDS-01|
+ - [Raspberry Pi Mouse V3](https://rt-net.jp/products/raspberrypimousev3/)
+    - Raspberry Pi
+        - Raspberry Pi 3B
+    - Linux OS
+        - Ubuntu 18.04
+    - Device Driver
+        - [rt-net/RaspberryPiMouse](https://github.com/rt-net/RaspberryPiMouse)
+    - ROS
+        - [Melodic Morenia](http://wiki.ros.org/melodic/Installation/Ubuntu)
+    - Raspberry Pi Mouse ROS Package
+        - [ryuichiueda/raspimouse_ros_2](https://github.com/ryuichiueda/raspimouse_ros_2)
+    - オプションパーツ
+        - [LiDAR Mount](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1299_1395&products_id=3867)
+
+ - Remote PC
+    - Linux OS
+        - Ubuntu 18.04
+    - ROS
+        - [Melodic Morenia](http://wiki.ros.org/melodic/Installation/Ubuntu)
+    - Raspberry Pi Mouse ROS Package
+        - [ryuichiueda/raspimouse_ros_2](https://github.com/ryuichiueda/raspimouse_ros_2)        
+
+また、本パッケージは以下の機材に対応しています。  
+ - ゲームパッド
+    - [Logicool Wireless Gamepad F710](https://gaming.logicool.co.jp/ja-jp/products/gamepads/f710-wireless-gamepad.html#940-0001440)
+    - [SONY DUALSHOCK 3](https://www.jp.playstation.com/ps3/peripheral/cechzc2j.html)
+ - レーザ測域センサ
+    - [RPLIDAR A1](https://www.slamtec.com/en/Lidar/A1)
+    - [LDS-01](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_5&products_id=3676)
 
 <a name="Installation"></a>
 ## Installation
@@ -45,7 +66,7 @@ source ~/ros_ws/deve/setup.bash
 <a name="QuickStart"></a>
 ## QuickStart
 無事インストールが完了したら、以下の一連のコマンドを実行しましょう。SLAMで地図生成を行い、作った地図を利用してナビゲーションを行うことができます。それぞれの詳しい動かし方などについては[SLAM](#slam)、[ナビゲーション](#navigation)を参照してください。  
-ここでは例として、ゲームパッドのLogicool F710とレーザ測域センサのRPLIDAR A1
+ここでは例として、ゲームパッドのLogicool F710とレーザ測域センサのRPLIDAR A1を使用しています。
 ```sh
 # SLAMで地図生成
 ## ロボット側で以下の2つのコマンドを実行
@@ -65,15 +86,13 @@ roslaunch raspimouse_navigation pc_navigation.launch　map_file:=$(find raspimou
 ## RVizが立ち上がるのでそこで操作してみましょう
 ```
 
+---
+<a name="raspimouse_slam"></a>
 ## raspimouse_slam
-画像があると良さそう  
-LIDARを使ってSLAM（自己位置推定と地図生成）を行うパッケージです。
+LIDARを使ってSLAM（自己位置推定と地図生成）を行うパッケージです。  
+<img src=https://rt-net.github.io/images/raspberry-pi-mouse/slam_gmapping.png width=500 />
 
-### Used devices
-書くこと
- * 開発PC使ってる
- * 対応しているLIDAR
- * 対応しているコントローラ
+ここでは、レーザ測域センサとして[RPLIDAR A1](https://www.slamtec.com/en/Lidar/A1)、コントローラとして[Logicool Wireless Gamepad F710](https://gaming.logicool.co.jp/ja-jp/products/gamepads/f710-wireless-gamepad.html#940-0001440)を使用しています。
 
 ### Usage
 Raspberry Pi Mouse上で、次のコマンドを実行します。LIDARなどを起動します。
@@ -107,17 +126,19 @@ rosrun map_server map_saver -f <MAP_NAME>
 
 地図の確認ができたら、起動しているROSノードを全て終了します。
 
-## raspimouse_navigation
-画像があるといいよね
-このパッケージはamclとmove_baseを利用しています。予め作られた地図と周辺環境の情報から自己位置推定を行い、地図上の任意の座標まで自律移動を行うことができます。
+### Video
+以下の動画は、実際にRaspberry Pi MouseがSLAMをしている様子を映しています。  
+**ここではURG使ってるけど、RPLIDAR版もあったほうが良い？それともこのままでいいかなってかRPLIDARだとNoetic対応してないからLDSorURGが良いか**  
+[![slam_urg](http://img.youtube.com/vi/gWozU47UqVE/sddefault.jpg)](https://youtu.be/gWozU47UqVE)
 
-### Used devices
-LIDARと開発PC  
-ここではRPLIDARを使っているです。LDSにも対応したのは確認できた。URGはまだ。
+<a name="raspimouse_navigation"></a>
+## raspimouse_navigation
+このパッケージはamclとmove_baseを利用しています。予め作られた地図と周辺環境の情報から自己位置推定を行い、地図上の任意の座標まで自律移動を行うことができます。  
+**画像があるといいよね**
+
+ここでは、レーザ測域センサとして[RPLIDAR A1](https://www.slamtec.com/en/Lidar/A1)を使用しています。
 
 ### Usage
-画像入れつつ起動する手順とか示しましょう〜  
-
 Raspberry Pi Mouse上で、次のコマンドを実行します。Raspberry Pi MouseのモータとLIDARを起動するためのノードを起動しています。
 ```sh
 roslaunch raspimouse_navigation robot_navigation.launch rplidar:=true
@@ -127,8 +148,15 @@ roslaunch raspimouse_navigation robot_navigation.launch rplidar:=true
 ```sh
 roslaunch raspimouse_navigation pc_navigation.launch　map_file:=$(find raspimouse_slam)/maps/<MAP_NAME>.yaml
 ```
+**上のlaunchの起動直後の様子を**
 
-まだ書いてねー、RVizのスクショとかも貼ってねー
+**実画像+RVizで初期位置合わせてる様子を（GIF）**
 
+**実画像+RVizで目標位置を与えている様子を（GIF）**
+
+### Video
+**一連の流れをやってる動画を置いておこう。**  
+
+<a name="License"></a>
 # License
 このリポジトリはApache License Version 2.0 ライセンスの元、公開されています。ライセンスについては[LICENSE](./LICENSE)をご参照ください。
