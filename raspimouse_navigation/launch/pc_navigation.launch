@@ -8,10 +8,10 @@
     <arg name="rviz" default="true" />
 
     <!-- navigation -->
-    <include file="$(find raspimouse_navigation)/launch/$(arg navigation).launch" />
+    <include file="$(find raspimouse_navigation)/launch/include/$(arg navigation).launch" />
 
     <!-- localization -->
-    <include file="$(find raspimouse_navigation)/launch/$(arg localization).launch" />
+    <include file="$(find raspimouse_navigation)/launch/include/$(arg localization).launch" />
     
     <!-- map server -->
     <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" output="screen" />
