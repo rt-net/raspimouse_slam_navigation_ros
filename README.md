@@ -128,7 +128,6 @@ rosrun map_server map_saver -f <MAP_NAME>
 
 ### Video
 以下の動画は、実際にRaspberry Pi MouseがSLAMをしている様子を映しています。  
-**ここではURG使ってるけど、RPLIDAR版もあったほうが良い？それともこのままでいいかなってかRPLIDARだとNoetic対応してないからLDSorURGが良いか**  
 [![slam_urg](http://img.youtube.com/vi/gWozU47UqVE/sddefault.jpg)](https://youtu.be/gWozU47UqVE)
 
 <a name="raspimouse_navigation"></a>
