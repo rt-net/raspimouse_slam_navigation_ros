@@ -49,7 +49,7 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。以下のリストは
 ## Installation
 以下のコマンドを実行してインストールを行います。
 ```sh
-cd ~/ros_ws/src
+cd ~/catkin_ws/src
 # Clone the ROS packages
 git clone https://github.com/ryuichiueda/raspimouse_ros_2
 git clone -b melodic-devel https://github.com/rt-net/raspimouse_ros_examples
@@ -58,9 +58,9 @@ git clone -b melodic-devel https://github.com/rt-net/raspimouse_slam_navigation_
 rosdep install -r -y --from-paths . --ignore-src
 
 # make and install
-cd ~/ros_ws
+cd ~/catkin_ws
 catkin_make
-source ~/ros_ws/devel/setup.bash
+source ~/catkin_ws/devel/setup.bash
 ```
 
 <a name="QuickStart"></a>
