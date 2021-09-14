@@ -60,7 +60,7 @@ rosdep install -r -y --from-paths . --ignore-src
 # make and install
 cd ~/ros_ws
 catkin_make
-source ~/ros_ws/deve/setup.bash
+source ~/ros_ws/devel/setup.bash
 ```
 
 <a name="QuickStart"></a>
