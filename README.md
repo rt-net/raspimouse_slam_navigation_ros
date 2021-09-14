@@ -70,13 +70,14 @@ source ~/ros_ws/devel/setup.bash
 ```sh
 # SLAMで地図生成
 ## ロボット側で以下の2つのコマンドを実行
+## ジョイントコントローラの操作方法については、[こちら](https://github.com/rt-net/raspimouse_ros_examples#joystick_control)を参照してください
 roslaunch raspimouse_ros_examples mouse_with_lidar.launch lds:=true port:=/dev/ttyUSB0
 roslaunch raspimouse_ros_examples teleop.launch mouse:=false joy:=true joyconfig:=f710
 ## PC側で次のコマンドを実行実行
 roslaunch raspimouse_slam raspimouse_slam.launch lds:=true
 ## 地図ができたら引き続きPC側で実行
-cd ~/ros_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps
-rosrun map_server map_saver -f <MAP_NAME>
+cd $(rospack find raspimouse_slam)/maps
+rosrun map_server map_saver -f $MAP_NAME
 
 # ナビゲーション
 ## ロボット側で次のコマンドを実行
