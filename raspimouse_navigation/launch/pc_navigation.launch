@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <!-- map for scan matching -->
-    <arg name="map_file" default="$(find raspimouse_slam)/maps/rt-seminar-4f.yaml" />
+    <arg name="map_file" default="$(rospack find raspimouse_slam)/maps/rt-seminar-4f.yaml" />
     <!-- other arguments -->
     <arg name="navigation" default="move_base" />
     <arg name="localization" default="amcl" />
