@@ -83,7 +83,7 @@ rosrun map_server map_saver -f $MAP_NAME
 ## ロボット側で次のコマンドを実行
 roslaunch raspimouse_navigation robot_navigation.launch lds:=true
 ## PC側で次のコマンドを実行
-roslaunch raspimouse_navigation pc_navigation.launch　map_file:=$(find raspimouse_slam)/maps/<MAP_NAME>.yaml
+roslaunch raspimouse_navigation pc_navigation.launch　map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
 ## RVizが立ち上がるのでそこで操作してみましょう
 ```
 
@@ -115,14 +115,14 @@ RVizが立ち上がり、Raspberry Pi Mouseを動かすと地図が構築され�
 
 地図の保存には次のROSノードを実行します。開発用PC側で起動することを推奨します。
 ```sh
-cd ~/ros_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps
-rosrun map_server map_saver -f <MAP_NAME>
+cd ~/catkin_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps
+rosrun map_server map_saver -f $MAP_NAME
 ```
 
 `pgm`と`yaml`の2つのファイルが生成されています。
 ```sh
-~/ros_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps$ ls
-<MAP_NAME>.pgm <MAP_NAME>.yaml
+~/catkin_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps$ ls
+$MAP_NAME.pgm $MAP_NAME.yaml
 ```
 
 地図の確認ができたら、起動しているROSノードを全て終了します。
@@ -147,7 +147,7 @@ roslaunch raspimouse_navigation robot_navigation.launch lds:=true
 開発用のパソコン上で、次のコマンドを実行します。自己位置推定と経路生成用のノードを起動し、RVizを立ち上げます。（下記画像を参照）  
 `map_file`パラメータがあるので、随時環境に合わせて変更をしてください。
 ```sh
-roslaunch raspimouse_navigation pc_navigation.launch　map_file:=$(find raspimouse_slam)/maps/<MAP_NAME>.yaml
+roslaunch raspimouse_navigation pc_navigation.launch　map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
 ```
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/navigation_afterlaunched.png width=500 />  
 
