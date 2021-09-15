@@ -25,6 +25,8 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。以下のリストは
     - ROS
         - [Melodic Morenia](http://wiki.ros.org/melodic/Installation/Ubuntu)
     - Raspberry Pi Mouse ROS Package
+        - [rt-net/raspimouse_slam_navigation_ros](https://github.com/rt-net/raspimouse_slam_navigation_ros)
+        - [rt-net/raspimouse_ros_examples](https://github.com/rt-net/raspimouse_ros_examples)
         - [ryuichiueda/raspimouse_ros_2](https://github.com/ryuichiueda/raspimouse_ros_2)
     - オプションパーツ
         - [LiDAR Mount](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1299_1395&products_id=3867)
@@ -35,7 +37,7 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。以下のリストは
     - ROS
         - [Melodic Morenia](http://wiki.ros.org/melodic/Installation/Ubuntu)
     - Raspberry Pi Mouse ROS Package
-        - [ryuichiueda/raspimouse_ros_2](https://github.com/ryuichiueda/raspimouse_ros_2)        
+        - [rt-net/raspimouse_slam_navigation_ros](https://github.com/rt-net/raspimouse_slam_navigation_ros)    
 
 また、本パッケージは以下の機材に対応しています。  
  - ゲームパッド
@@ -47,12 +49,28 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。以下のリストは
 
 <a name="Installation"></a>
 ## Installation
-以下のコマンドを実行してインストールを行います。
+### Raspberry Pi Mouse V3
+以下のコマンドをロボット側で実行してインストールを行います。
 ```sh
 cd ~/catkin_ws/src
 # Clone the ROS packages
 git clone https://github.com/ryuichiueda/raspimouse_ros_2
 git clone -b melodic-devel https://github.com/rt-net/raspimouse_ros_examples
+git clone -b melodic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
+# Install dependencies
+rosdep install -r -y --from-paths . --ignore-src
+
+# make and install
+cd ~/catkin_ws
+catkin_make
+source ~/catkin_ws/devel/setup.bash
+```
+
+### Remote PC
+以下のコマンドを開発用PC側で実行してインストールを行います。
+```sh
+cd ~/catkin_ws/src
+# Clone the ROS packages
 git clone -b melodic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
 # Install dependencies
 rosdep install -r -y --from-paths . --ignore-src
