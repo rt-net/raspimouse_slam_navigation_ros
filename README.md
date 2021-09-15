@@ -89,8 +89,8 @@ source ~/catkin_ws/devel/setup.bash
 # SLAMで地図生成
 ## ロボット側で以下の2つのコマンドを実行
 ## ゲームパッドの操作方法については、 https://github.com/rt-net/raspimouse_ros_examples#joystick_control を参照してください
-roslaunch raspimouse_ros_examples mouse_with_lidar.launch lds:=true port:=/dev/ttyUSB0
-roslaunch raspimouse_ros_examples teleop.launch mouse:=false joy:=true joyconfig:=f710
+roslaunch raspimouse_slam robot_bringup.launch lds:=true port:=/dev/ttyUSB0
+roslaunch raspimouse_slam teleop.launch joy:=true joyconfig:=f710
 ## PC側で次のコマンドを実行実行
 roslaunch raspimouse_slam raspimouse_slam.launch lds:=true
 ## 地図ができたら引き続きPC側で実行
@@ -116,13 +116,13 @@ LIDARを使ってSLAM（自己位置推定と地図生成）を行うパッケ�
 ### Usage
 Raspberry Pi Mouse上で、次のコマンドを実行します。LIDARなどを起動します。
 ```sh
-roslaunch raspimouse_ros_examples mouse_with_lidar.launch lds:=true port:=/dev/ttyUSB0
+roslaunch raspimouse_slam robot_bringup.launch lds:=true port:=/dev/ttyUSB0
 ```
 
 Raspberry Pi Mouse上で、次のコマンドを実行します。ゲームパッドで制御することができます。  
 ゲームパッドの操作方法については、[raspimouse_ros_examplesの"joystick_control"](https://github.com/rt-net/raspimouse_ros_examples#joystick_control)を参照してください。
 ```sh
-roslaunch raspimouse_ros_examples teleop.launch mouse:=false joy:=true joyconfig:=f710
+roslaunch raspimouse_slam teleop.launch mouse:=false joy:=true joyconfig:=f710
 ```
 
 次のコマンドを実行して、SLAMを開始します。
