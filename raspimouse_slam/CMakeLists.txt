@@ -4,12 +4,7 @@ project(raspimouse_slam)
 find_package(catkin REQUIRED)
 catkin_package()
 
-include_directories(
-# include
-# ${catkin_INCLUDE_DIRS}
-)
-
-install(DIRECTORY launch
+install(DIRECTORY launch maps rviz
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 

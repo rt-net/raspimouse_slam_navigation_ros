@@ -5,7 +5,7 @@
     <description>The raspimouse_slam package</description>
     <maintainer email="support@rt-net.jp">RT Corporation</maintainer>
     <author email="kozasa@rt-net.jp">Shuhei Kozasa</author>
-    <license>Apache License 2.0</license>
+    <license>Apache-2.0</license>
 
     <buildtool_depend>catkin</buildtool_depend>
     
@@ -13,7 +13,6 @@
     <exec_depend>gmapping</exec_depend>
     <exec_depend>urg_node</exec_depend>
     <exec_depend>hls_lfcd_lds_driver</exec_depend>
-
-    <export>
-    </export>
+    <exec_depend>tf</exec_depend>
+    <test_depend>roslaunch</test_depend>
 </package>
