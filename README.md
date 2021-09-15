@@ -70,7 +70,7 @@ source ~/catkin_ws/devel/setup.bash
 ```sh
 # SLAMで地図生成
 ## ロボット側で以下の2つのコマンドを実行
-## ジョイントコントローラの操作方法については、[こちら](https://github.com/rt-net/raspimouse_ros_examples#joystick_control)を参照してください
+## ゲームパッドの操作方法については、 https://github.com/rt-net/raspimouse_ros_examples#joystick_control を参照してください
 roslaunch raspimouse_ros_examples mouse_with_lidar.launch lds:=true port:=/dev/ttyUSB0
 roslaunch raspimouse_ros_examples teleop.launch mouse:=false joy:=true joyconfig:=f710
 ## PC側で次のコマンドを実行実行
@@ -101,17 +101,20 @@ Raspberry Pi Mouse上で、次のコマンドを実行します。LIDARなどを
 roslaunch raspimouse_ros_examples mouse_with_lidar.launch lds:=true port:=/dev/ttyUSB0
 ```
 
-Raspberry Pi Mouse上で、次のコマンドを実行します。ゲームパッドで制御することができます。
+Raspberry Pi Mouse上で、次のコマンドを実行します。ゲームパッドで制御することができます。  
+ゲームパッドの操作方法については、[raspimouse_ros_examplesの"joystick_control"](https://github.com/rt-net/raspimouse_ros_examples#joystick_control)を参照してください。
 ```sh
 roslaunch raspimouse_ros_examples teleop.launch mouse:=false joy:=true joyconfig:=f710
 ```
 
-次のコマンドを実行して、SLAMを開始します。開発用PC側で起動することを推奨します。この時、開発用PCとRaspberry Pi Mouseが同じROS Master下にいる必要があります。
+次のコマンドを実行して、SLAMを開始します。
+RVizが立ち上がり、Raspberry Pi Mouseを動かすと地図が構築されていく様子が見られます。
+
+開発用PC側で起動することを推奨します。この時、開発用PCとRaspberry Pi Mouseが同じネットワーク上で同じROS Masterを指定している必要があります。
+
 ```sh
 roslaunch raspimouse_slam raspimouse_slam.launch lds:=true
 ```
-
-RVizが立ち上がり、Raspberry Pi Mouseを動かすと地図が構築されていく様子が見れます。
 
 地図の保存には次のROSノードを実行します。開発用PC側で起動することを推奨します。
 ```sh
