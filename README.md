@@ -159,7 +159,8 @@ $MAP_NAME.pgm $MAP_NAME.yaml
 このパッケージはamclとmove_baseを利用しています。予め作られた地図と周辺環境の情報から自己位置推定を行い、地図上の任意の座標まで自律移動を行うことができます。  
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/navigating_goalpoint.png width=500 />
 
-ここでは、レーザ測域センサとして[LDS-01](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_5&products_id=3676)を使用しています。
+ここでは、レーザ測域センサとして[LDS-01](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_5&products_id=3676)を使用しています。  
+また、開発用PCとRaspberry Pi Mouseが同じネットワーク上で同じROS Masterを指定している必要があります。
 
 ### Usage
 Raspberry Pi Mouse上で、次のコマンドを実行します。Raspberry Pi MouseのモータとLIDARを起動するためのノードを起動しています。
