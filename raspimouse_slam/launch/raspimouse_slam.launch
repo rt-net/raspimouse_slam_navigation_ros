@@ -41,18 +41,6 @@
     <!-- <param name="lasamplestep" value="0.005"/>  -->
   </node>
 
-  <group if="$(arg urg)">
-    <node pkg="tf" type="static_transform_publisher" name="laser_broadcaster" args="0 0 0.01 0 0 0 base_link laser 100" />
-  </group>
-
-  <group if="$(arg rplidar)">
-    <node pkg="tf" type="static_transform_publisher" name="laser_broadcaster" args="0 0 0.01 0 3.14 3.14 base_link laser 100" />
-  </group>
-
-  <group if="$(arg lds)">
-    <node pkg="tf" type="static_transform_publisher" name="laser_broadcaster" args="0 0 0.01 0 3.14 3.14 base_link laser 100" />
-  </group>
-
   <node name="rviz" pkg="rviz" type="rviz" respawn="false"
     args="-d $(arg rviz_config)" output="screen" />
 </launch>
