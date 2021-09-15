@@ -9,9 +9,9 @@
 
     <buildtool_depend>catkin</buildtool_depend>
 
+    <exec_depend>amcl</exec_depend>
     <exec_depend>map_server</exec_depend>
     <exec_depend>move_base</exec_depend>
-    <exec_depend>amcl</exec_depend>
+    <exec_depend>raspimouse_ros_2</exec_depend>
     <exec_depend>tf</exec_depend>
-    <test_depend>roslaunch</test_depend>
 </package>
