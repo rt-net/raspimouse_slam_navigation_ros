@@ -31,7 +31,7 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。
         - [rt-net/raspimouse_ros_examples](https://github.com/rt-net/raspimouse_ros_examples)
         - [ryuichiueda/raspimouse_ros_2](https://github.com/ryuichiueda/raspimouse_ros_2)
     - オプションパーツ
-        - [LiDAR Mount](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1299_1395&products_id=3867)
+        - [マルチLiDARマウント](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1299_1395&products_id=3867)
 
  - Remote PC
     - Linux OS
