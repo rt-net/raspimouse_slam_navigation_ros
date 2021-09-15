@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>raspimouse_slam_navigation</name>
+    <version>0.0.0</version>
+    <description>The raspimouse_slam_navigation package</description>
+    <maintainer email="shop@rt-net.jp">RT Corporation</maintainer>
+
+    <license>Apache-2.0</license>
+
+    <url type="bugtracker">https://github.com/rt-net/raspimouse_slam_navigation_ros/issues</url>
+    <url type="repository">https://github.com/rt-net/raspimouse_slam_navigation_ros</url>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <exec_depend>raspimouse_slam</exec_depend>
+    <exec_depend>raspimouse_navigation</exec_depend>
+
+    <export>
+        <metapackage />
+    </export>
+</package>

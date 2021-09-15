@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="urg" default="false" />
+    <arg name="lds" default="false" />
+    <arg name="rplidar" default="false" />
+
+    <arg name="port" default="/dev/ttyUSB0" />
+    <arg name="laser_frame_id" default="laser" />
+
+    <arg name="imu" default="false" />
+    <arg name="imu_port" default="/dev/ttyACM0" />
+    <arg name="imu_frame_id" default="imu_link" />
+
+    <node pkg="raspimouse_ros_2" name="motors" type="motors" required="true" output="screen" args="on" />
+
+    <group if="$(arg imu)">
+        <include file="$(find rt_usb_9axisimu_driver)/launch/rt_usb_9axisimu_driver.launch" >
+            <param name="port" value="$(arg imu_port)" />
+            <param name="frame_id" value="$(arg imu_frame_id)" />
+        </include>
+    </group>
+
+    <group if="$(arg urg)">
+        <node name="lidar_node" pkg="urg_node" type="urg_node" required="true">
+            <param name="serial_port" value="$(arg port)" />
+        </node>
+        <node pkg="tf" type="static_transform_publisher" name="laser_broadcaster"
+            args="0 0 0.01 0 0 0 base_link $(arg laser_frame_id) 100" />
+    </group>
+
+    <group if="$(arg lds)">
+        <include file="$(find hls_lfcd_lds_driver)/launch/hlds_laser.launch" >
+            <param name="port" value="$(arg port)" />
+            <param name="frame_id" value="$(arg laser_frame_id)" />
+        </include>
+        <node pkg="tf" type="static_transform_publisher" name="laser_broadcaster"
+            args="0 0 0.01 0 3.14 3.14 base_link $(arg laser_frame_id) 100" />
+    </group>    
+
+    <group if="$(arg rplidar)">
+        <node name="lidar_node" pkg="rplidar_ros" type="rplidarNode" required="true" >
+            <param name="serial_port" value="$(arg port)" />
+            <param name="frame_id" value="$(arg laser_frame_id)" />
+        </node>
+        <node pkg="tf" type="static_transform_publisher" name="laser_broadcaster"
+            args="0 0 0.01 0 3.14 3.14 base_link $(arg laser_frame_id) 100" />
+    </group>
+
+</launch>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- map for scan matching -->
+    <arg name="map_file" default="$(find raspimouse_slam)/maps/rt-seminar-4f.yaml" />
+    <!-- other arguments -->
+    <arg name="navigation" default="move_base" />
+    <arg name="localization" default="amcl" />
+    <arg name="rviz" default="true" />
+
+    <!-- navigation -->
+    <include file="$(find raspimouse_navigation)/launch/include/$(arg navigation).launch" />
+
+    <!-- localization -->
+    <include file="$(find raspimouse_navigation)/launch/include/$(arg localization).launch" />
+    
+    <!-- map server -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" output="screen" />
+
+    <!-- rviz -->
+    <group if="$(arg rviz)">
+        <include file="$(find raspimouse_navigation)/launch/rviz_$(arg navigation).launch" />
+    </group>
+
+</launch>

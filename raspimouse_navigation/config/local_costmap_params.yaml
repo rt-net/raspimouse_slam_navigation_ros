@@ -1,0 +1,33 @@
+local_costmap:
+  plugins:
+    - {name: static_layer, type: "costmap_2d::StaticLayer"}
+    - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+    - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}
+  global_frame: odom
+  robot_base_frame: base_link
+  update_frequency: 5.0
+  publish_frequency: 5.0
+  width: 4.0
+  height: 4.0
+  resolution: 0.01
+  rolling_window: true
+  transform_tolerance: 1.0 
+  cost_scaling_factor: 0.5
+
+  static_layer:
+    static_map: false
+
+  inflation_layer:
+    inflation_radius: 0.1
+
+  obstacle_layer:
+    # You can add more sources
+    observation_sources: scan_sensor
+    scan_sensor:
+      sensor_frame: laser
+      topic: /scan
+      data_type: LaserScan
+      marking: true
+      clearing: true
+      obstacle_range: 1.0
+      raytrace_range: 1.5
