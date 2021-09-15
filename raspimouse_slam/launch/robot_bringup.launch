@@ -12,7 +12,8 @@
 
   <include file="$(find raspimouse_ros_2)/launch/raspimouse.launch" >
     <arg name="imu" value="$(arg imu)" />
-    <arg name="port" value="$(arg imu_port)" />
+    <!-- TODO: support specifying IMU port -->
+    <!-- <arg name="port" value="$(arg imu_port)" /> -->
   </include>
   
 
