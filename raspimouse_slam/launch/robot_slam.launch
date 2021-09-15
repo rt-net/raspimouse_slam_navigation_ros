@@ -9,6 +9,9 @@
 
   <!-- <include file="$(find raspimouse_ros_2)/launch/raspimouse.launch" /> -->
   <node pkg="raspimouse_ros_2" name="motors" type="motors" required="true" output="screen" args="on" />
+  <node pkg="raspimouse_ros_2" name="leds" type="leds" required="true" />
+  <node pkg="raspimouse_ros_2" name="buttons" type="buttons" required="true" />
+  <node pkg="raspimouse_ros_2" name="buzzer" type="buzzer.py" required="true" />
 
   <group if="$(arg urg)">
     <node name="lidar_node" pkg="urg_node" type="urg_node" required="true">
@@ -29,3 +32,5 @@
       <param name="frame_id" value="$(arg frame_id)"/>
     </include>
   </group>
+
+</launch>
