@@ -7,11 +7,14 @@
   <arg name="port" default="/dev/ttyACM0" />
   <arg name="frame_id" default="laser" />
 
-  <!-- <include file="$(find raspimouse_ros_2)/launch/raspimouse.launch" /> -->
-  <node pkg="raspimouse_ros_2" name="motors" type="motors" required="true" output="screen" args="on" />
-  <node pkg="raspimouse_ros_2" name="leds" type="leds" required="true" />
-  <node pkg="raspimouse_ros_2" name="buttons" type="buttons" required="true" />
-  <node pkg="raspimouse_ros_2" name="buzzer" type="buzzer.py" required="true" />
+  <arg name="imu" default="false" />
+  <arg name="imu_port" default="/dev/ttyACM0" />
+
+  <include file="$(find raspimouse_ros_2)/launch/raspimouse.launch" >
+    <arg name="imu" value="$(arg imu)" />
+    <arg name="port" value="$(arg imu_port)" />
+  </include>
+  
 
   <group if="$(arg urg)">
     <node name="lidar_node" pkg="urg_node" type="urg_node" required="true">
