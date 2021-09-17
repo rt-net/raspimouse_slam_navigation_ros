@@ -19,25 +19,26 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。
 
  - [Raspberry Pi Mouse V3](https://rt-net.jp/products/raspberrypimousev3/)
     - Raspberry Pi
-        - Raspberry Pi 3B
+        - Raspberry Pi 4
     - Linux OS
-        - Ubuntu 18.04
+        - Ubuntu 20.04
     - Device Driver
         - [rt-net/RaspberryPiMouse](https://github.com/rt-net/RaspberryPiMouse)
     - ROS
-        - [Melodic Morenia](http://wiki.ros.org/melodic/Installation/Ubuntu)
+        - [Noetic Ninjemys](http://wiki.ros.org/noetic/Installation/Ubuntu)
     - Raspberry Pi Mouse ROS Package
         - [rt-net/raspimouse_slam_navigation_ros](https://github.com/rt-net/raspimouse_slam_navigation_ros)
         - [rt-net/raspimouse_ros_examples](https://github.com/rt-net/raspimouse_ros_examples)
         - [ryuichiueda/raspimouse_ros_2](https://github.com/ryuichiueda/raspimouse_ros_2)
     - オプションパーツ
+        - [Raspberry Pi4用コネクタ](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=3776)
         - [マルチLiDARマウント](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1299_1395&products_id=3867)
 
  - Remote PC
     - Linux OS
-        - Ubuntu 18.04
+        - Ubuntu 20.04
     - ROS
-        - [Melodic Morenia](http://wiki.ros.org/melodic/Installation/Ubuntu)
+        - [Noetic Ninjemys](http://wiki.ros.org/noetic/Installation/Ubuntu)
     - Raspberry Pi Mouse ROS Package
         - [rt-net/raspimouse_slam_navigation_ros](https://github.com/rt-net/raspimouse_slam_navigation_ros)    
 
@@ -46,7 +47,6 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。
     - [Logicool Wireless Gamepad F710](https://gaming.logicool.co.jp/ja-jp/products/gamepads/f710-wireless-gamepad.html#940-0001440)
     - [SONY DUALSHOCK 3](https://www.jp.playstation.com/ps3/peripheral/cechzc2j.html)
  - レーザ測域センサ
-    - [RPLIDAR A1](https://www.slamtec.com/en/Lidar/A1)
     - [LDS-01](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_5&products_id=3676)
 
 <a name="Installation"></a>
@@ -57,8 +57,8 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。
 cd ~/catkin_ws/src
 # Clone the ROS packages
 git clone https://github.com/ryuichiueda/raspimouse_ros_2
-git clone -b melodic-devel https://github.com/rt-net/raspimouse_ros_examples
-git clone -b melodic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
+git clone -b noetic-devel https://github.com/rt-net/raspimouse_ros_examples
+git clone -b noetic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
 # Install dependencies
 rosdep install -r -y --from-paths . --ignore-src
 
@@ -73,7 +73,7 @@ source ~/catkin_ws/devel/setup.bash
 ```sh
 cd ~/catkin_ws/src
 # Clone the ROS packages
-git clone -b melodic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
+git clone -b noetic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
 # Install dependencies
 rosdep install -r -y --from-paths . --ignore-src
 
