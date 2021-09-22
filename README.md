@@ -101,9 +101,9 @@ rosrun map_server map_saver -f $MAP_NAME
 
 # ナビゲーション
 ## ロボット側で次のコマンドを実行
-roslaunch raspimouse_navigation robot_navigation.launch lds:=true
+roslaunch raspimouse_navigation robot_navigation.launch lds:=true port:=/dev/ttyUSB0
 ## PC側で次のコマンドを実行
-roslaunch raspimouse_navigation pc_navigation.launch　map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
+roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
 ## RVizが立ち上がるのでそこで操作してみましょう
 ```
 
@@ -165,13 +165,13 @@ $MAP_NAME.pgm $MAP_NAME.yaml
 ### Usage
 Raspberry Pi Mouse上で、次のコマンドを実行します。Raspberry Pi MouseのモータとLIDARを起動するためのノードを起動しています。
 ```sh
-roslaunch raspimouse_navigation robot_navigation.launch lds:=true
+roslaunch raspimouse_navigation robot_navigation.launch lds:=true port:=/dev/ttyUSB0
 ```
 
 開発用のパソコン上で、次のコマンドを実行します。自己位置推定と経路生成用のノードを起動し、RVizを立ち上げます。（下記画像を参照）  
 `map_file`パラメータがあるので、随時環境に合わせて変更をしてください。
 ```sh
-roslaunch raspimouse_navigation pc_navigation.launch　map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
+roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
 ```
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/navigation_afterlaunched.png width=500 />  
 
