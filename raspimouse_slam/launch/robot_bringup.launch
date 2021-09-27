@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="urg" default="false" />
-  <arg name="rplidar" default="false" />
   <arg name="lds" default="false" />
 
   <arg name="port" default="/dev/ttyACM0" />
@@ -22,14 +21,6 @@
       <param name="serial_port" value="$(arg port)"/>
     </node>
     <node pkg="tf" type="static_transform_publisher" name="laser_broadcaster" args="0 0 0.01 0 0 0 base_link laser 100" />
-  </group>
-
-  <group if="$(arg rplidar)">
-    <node name="lidar_node" pkg="rplidar_ros" type="rplidarNode" required="true">
-      <param name="serial_port" value="$(arg port)"/>
-      <param name="frame_id" value="$(arg frame_id)"/>
-    </node>
-    <node pkg="tf" type="static_transform_publisher" name="laser_broadcaster" args="0 0 0.01 0 3.14 3.14 base_link laser 100" />
   </group>
 
   <group if="$(arg lds)">
