@@ -48,6 +48,7 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。
     - [SONY DUALSHOCK 3](https://www.jp.playstation.com/ps3/peripheral/cechzc2j.html)
  - レーザ測域センサ
     - [LDS-01](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_5&products_id=3676)
+    - [URG](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_1296&products_id=2816)
 
 <a name="Installation"></a>
 ## Installation
