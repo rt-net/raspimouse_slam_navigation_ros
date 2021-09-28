@@ -24,7 +24,7 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。
 
  - [Raspberry Pi Mouse V3](https://rt-net.jp/products/raspberrypimousev3/)
     - Raspberry Pi
-        - Raspberry Pi 4
+        - Raspberry Pi 4 Model B
     - Linux OS
         - Ubuntu 20.04
     - Device Driver
