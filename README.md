@@ -3,8 +3,8 @@ Raspberry Pi MouseでSLAMやナビゲーションを行うためのROSメタパ�
 
 現在、以下のROSのディストリビューションに対応しております。
 
- - Melodic (melodic-devel)
- - Noetic (noetic-devel)
+- Melodic ([`melodic-devel`](https://github.com/rt-net/raspimouse_slam_navigation_ros/tree/melodic-devel))
+- Noetic ([`noetic-devel`](https://github.com/rt-net/raspimouse_slam_navigation_ros/tree/noetic-devel))
 
 ---
 # Table of Concents
