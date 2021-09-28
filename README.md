@@ -1,6 +1,11 @@
 # raspimouse_slam_navigation
 Raspberry Pi MouseでSLAMやナビゲーションを行うためのROSメタパッケージです。
 
+現在、以下のROSのディストリビューションに対応しております。
+
+ - Melodic (melodic-devel)
+ - Noetic (noetic-devel)
+
 ---
 # Table of Concents
  - [Requirements](#Requirements)
