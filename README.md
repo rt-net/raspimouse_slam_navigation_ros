@@ -190,7 +190,7 @@ roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find ra
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/navigation_setting_goalpose.gif width=500 />
 
 ### Stopping the Robot
-与えた目標位置・姿勢を取り消したい場合は、新しいターミナルで次のコマンドを実行しましょう。RViz上では目標位置・姿勢が残りますが、ロボットは停止します。新たに、2D Nav Goalを設置すると、そちらに目標位置・姿勢が置き換わります。
+与えた目標位置・姿勢への移動を停止したい場合は、新しいターミナルで次のコマンドを実行しましょう。RViz上には目標位置・姿勢が残りますが、ロボットは停止します。新たに、2D Nav Goalを設置すると、そちらに目標位置・姿勢が置き換わります。
 ```sh
 rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}
 ```
