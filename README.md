@@ -111,7 +111,7 @@ roslaunch raspimouse_navigation robot_navigation.launch lds:=true port:=/dev/tty
 ## PC側で次のコマンドを実行
 roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
 ## RVizが立ち上がるのでそこで操作してみましょう
-## 指定した目標位置・姿勢を中止する場合は次のコマンドを実行
+## 指定した目標位置・姿勢への移動を中止する場合は次のコマンドを実行
 rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}
 ```
 
