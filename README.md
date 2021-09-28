@@ -146,7 +146,7 @@ roslaunch raspimouse_slam raspimouse_slam.launch lds:=true
 
 地図の保存には次のROSノードを実行します。開発用PC側で起動することを推奨します。
 ```sh
-cd ~/catkin_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps
+cd $(rospack find raspimouse_slam)/maps
 rosrun map_server map_saver -f $MAP_NAME
 ```
 
