@@ -63,8 +63,8 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。
 cd ~/catkin_ws/src
 # Clone the ROS packages
 git clone https://github.com/ryuichiueda/raspimouse_ros_2
-git clone -b noetic-devel https://github.com/rt-net/raspimouse_ros_examples
-git clone -b noetic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
+git clone -b $ROS_DISTRO-devel https://github.com/rt-net/raspimouse_ros_examples
+git clone -b $ROS_DISTRO-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
 # Install dependencies
 rosdep install -r -y --from-paths . --ignore-src
 
