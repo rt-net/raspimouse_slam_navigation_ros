@@ -1,6 +1,11 @@
 # raspimouse_slam_navigation
 Raspberry Pi MouseでSLAMやナビゲーションを行うためのROSメタパッケージです。
 
+現在、以下のROSのディストリビューションに対応しております。
+
+- Melodic ([`melodic-devel`](https://github.com/rt-net/raspimouse_slam_navigation_ros/tree/melodic-devel))
+- Noetic ([`noetic-devel`](https://github.com/rt-net/raspimouse_slam_navigation_ros/tree/noetic-devel))
+
 ---
 # Table of Concents
  - [Requirements](#Requirements)
@@ -19,25 +24,26 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。
 
  - [Raspberry Pi Mouse V3](https://rt-net.jp/products/raspberrypimousev3/)
     - Raspberry Pi
-        - Raspberry Pi 3B
+        - Raspberry Pi 4 Model B
     - Linux OS
-        - Ubuntu 18.04
+        - Ubuntu 20.04
     - Device Driver
         - [rt-net/RaspberryPiMouse](https://github.com/rt-net/RaspberryPiMouse)
     - ROS
-        - [Melodic Morenia](http://wiki.ros.org/melodic/Installation/Ubuntu)
+        - [Noetic Ninjemys](http://wiki.ros.org/noetic/Installation/Ubuntu)
     - Raspberry Pi Mouse ROS Package
         - [rt-net/raspimouse_slam_navigation_ros](https://github.com/rt-net/raspimouse_slam_navigation_ros)
         - [rt-net/raspimouse_ros_examples](https://github.com/rt-net/raspimouse_ros_examples)
         - [ryuichiueda/raspimouse_ros_2](https://github.com/ryuichiueda/raspimouse_ros_2)
     - オプションパーツ
+        - [Raspberry Pi4用コネクタ](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=3776)
         - [マルチLiDARマウント](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1299_1395&products_id=3867)
 
  - Remote PC
     - Linux OS
-        - Ubuntu 18.04
+        - Ubuntu 20.04
     - ROS
-        - [Melodic Morenia](http://wiki.ros.org/melodic/Installation/Ubuntu)
+        - [Noetic Ninjemys](http://wiki.ros.org/noetic/Installation/Ubuntu)
     - Raspberry Pi Mouse ROS Package
         - [rt-net/raspimouse_slam_navigation_ros](https://github.com/rt-net/raspimouse_slam_navigation_ros)    
 
@@ -46,8 +52,8 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。
     - [Logicool Wireless Gamepad F710](https://gaming.logicool.co.jp/ja-jp/products/gamepads/f710-wireless-gamepad.html#940-0001440)
     - [SONY DUALSHOCK 3](https://www.jp.playstation.com/ps3/peripheral/cechzc2j.html)
  - レーザ測域センサ
-    - [RPLIDAR A1](https://www.slamtec.com/en/Lidar/A1)
     - [LDS-01](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_5&products_id=3676)
+    - [URG](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_1296&products_id=2816)
 
 <a name="Installation"></a>
 ## Installation
@@ -57,8 +63,8 @@ Raspberry Pi Mouse V3と開発PCを用意しましょう。
 cd ~/catkin_ws/src
 # Clone the ROS packages
 git clone https://github.com/ryuichiueda/raspimouse_ros_2
-git clone -b melodic-devel https://github.com/rt-net/raspimouse_ros_examples
-git clone -b melodic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
+git clone -b $ROS_DISTRO-devel https://github.com/rt-net/raspimouse_ros_examples
+git clone -b $ROS_DISTRO-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
 # Install dependencies
 rosdep install -r -y --from-paths . --ignore-src
 
@@ -73,7 +79,7 @@ source ~/catkin_ws/devel/setup.bash
 ```sh
 cd ~/catkin_ws/src
 # Clone the ROS packages
-git clone -b melodic-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
+git clone -b $ROS_DISTRO-devel https://github.com/rt-net/raspimouse_slam_navigation_ros
 # Install dependencies
 rosdep install -r -y --from-paths . --ignore-src
 
@@ -96,7 +102,7 @@ roslaunch raspimouse_slam teleop.launch joy:=true joyconfig:=f710
 ## PC側で次のコマンドを実行実行
 roslaunch raspimouse_slam raspimouse_slam.launch lds:=true
 ## 地図ができたら引き続きPC側で実行
-cd $(rospack find raspimouse_slam)/maps
+roscd raspimouse_slam/maps
 rosrun map_server map_saver -f $MAP_NAME
 
 # ナビゲーション
@@ -105,6 +111,8 @@ roslaunch raspimouse_navigation robot_navigation.launch lds:=true port:=/dev/tty
 ## PC側で次のコマンドを実行
 roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
 ## RVizが立ち上がるのでそこで操作してみましょう
+## 指定した目標位置・姿勢への移動を中止する場合は次のコマンドを実行
+rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}
 ```
 
 ---
@@ -138,7 +146,7 @@ roslaunch raspimouse_slam raspimouse_slam.launch lds:=true
 
 地図の保存には次のROSノードを実行します。開発用PC側で起動することを推奨します。
 ```sh
-cd ~/catkin_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps
+roscd raspimouse_slam/maps
 rosrun map_server map_saver -f $MAP_NAME
 ```
 
@@ -181,6 +189,18 @@ roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find ra
 初期位置・姿勢の指示が完了したら、次は目標位置・姿勢を指示します。RVizの画面上部の紫色の矢印*2D Nav Goal*をクリックしましょう。地図上で、初期位置・姿勢を合わせた時と同様に、地図上をクリックして位置を、ホールドしたままマウスを動かして向きを指示しましょう。すると、ロボットが自律移動を開始します。  
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/navigation_setting_goalpose.gif width=500 />
 
+### Stopping the Robot
+与えた目標位置・姿勢への移動を停止したい場合は、新しいターミナルで次のコマンドを実行しましょう。RViz上には目標位置・姿勢が残りますが、ロボットは停止します。新たに、2D Nav Goalを設置すると、そちらに目標位置・姿勢が置き換わります。
+```sh
+rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}
+```
+
+また、ロボットが予期しない挙動をした場合は、安全に気をつけながらRaspberry Pi Mouse V3のモータ用電源をOFFにしましょう。
+モータ用電源はRaspberry Pi Mouse V3に搭載されたスイッチでON / OFFできます。
+次のコマンドを実行すると、ソフトウェアスイッチでモータ電源をOFFにできます。
+```sh
+rosservice call /motor_off
+```
 
 <a name="License"></a>
 # License

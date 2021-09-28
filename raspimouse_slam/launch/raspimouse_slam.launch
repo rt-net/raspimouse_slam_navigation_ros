@@ -2,7 +2,6 @@
 <launch>
   <arg name="rviz_config" default="$(find raspimouse_slam)/rviz/slam.rviz" />
   <arg name="urg" default="false" />
-  <arg name="rplidar" default="false" />
   <arg name="lds" default="false" />
 
   <node pkg="gmapping" type="slam_gmapping" name="raspimouse_slam_gmapping" output="screen">
@@ -11,7 +10,6 @@
     <param name="map_frame"  value="map" />
     <param name="map_update_interval" value="1.0"/>
     <param name="maxUrange" value="5.6" if="$(arg urg)"/>
-    <param name="maxUrange" value="12" if="$(arg rplidar)"/>
     <param name="maxUrange" value="3.5" if="$(arg lds)"/>
     <!-- <param name="sigma" value="0.05"/> -->
     <!-- <param name="kernelSize" value="1"/> -->
