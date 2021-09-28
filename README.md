@@ -195,7 +195,9 @@ roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find ra
 rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}
 ```
 
-また、ロボットが予期しない挙動を起こした場合は、安全に気をつけながらRaspberry Pi Mouse V3のモータ用電源をOFFにしましょう。物理スイッチで電源をOFFにする方法と、コマンド経由でOFFにする2種類の方法があります。いずれかを実施しましょう。
+また、ロボットが予期しない挙動をした場合は、安全に気をつけながらRaspberry Pi Mouse V3のモータ用電源をOFFにしましょう。
+モータ用電源はRaspberry Pi Mouse V3に搭載されたスイッチでON / OFFできます。
+次のコマンドを実行すると、ソフトウェアスイッチでモータ電源をOFFにできます。
 ```sh
 rosservice call /motor_off
 ```
