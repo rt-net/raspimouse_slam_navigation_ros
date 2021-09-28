@@ -102,7 +102,7 @@ roslaunch raspimouse_slam teleop.launch joy:=true joyconfig:=f710
 ## PC側で次のコマンドを実行実行
 roslaunch raspimouse_slam raspimouse_slam.launch lds:=true
 ## 地図ができたら引き続きPC側で実行
-cd $(rospack find raspimouse_slam)/maps
+roscd raspimouse_slam/maps
 rosrun map_server map_saver -f $MAP_NAME
 
 # ナビゲーション
@@ -146,7 +146,7 @@ roslaunch raspimouse_slam raspimouse_slam.launch lds:=true
 
 地図の保存には次のROSノードを実行します。開発用PC側で起動することを推奨します。
 ```sh
-cd $(rospack find raspimouse_slam)/maps
+roscd raspimouse_slam/maps
 rosrun map_server map_saver -f $MAP_NAME
 ```
 
