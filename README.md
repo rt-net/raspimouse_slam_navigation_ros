@@ -106,6 +106,8 @@ roslaunch raspimouse_navigation robot_navigation.launch lds:=true port:=/dev/tty
 ## PC側で次のコマンドを実行
 roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
 ## RVizが立ち上がるのでそこで操作してみましょう
+## 指定した目標位置・姿勢を中止する場合は次のコマンドを実行
+rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}
 ```
 
 ---
@@ -182,6 +184,16 @@ roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find ra
 初期位置・姿勢の指示が完了したら、次は目標位置・姿勢を指示します。RVizの画面上部の紫色の矢印*2D Nav Goal*をクリックしましょう。地図上で、初期位置・姿勢を合わせた時と同様に、地図上をクリックして位置を、ホールドしたままマウスを動かして向きを指示しましょう。すると、ロボットが自律移動を開始します。  
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/navigation_setting_goalpose.gif width=500 />
 
+### Stopping the Robot
+与えた目標位置・姿勢を取り消したい場合は、新しいターミナルで次のコマンドを実行しましょう。RViz上では目標位置・姿勢が残りますが、ロボットは停止します。新たに、2D Nav Goalを設置すると、そちらに目標位置・姿勢が置き換わります。
+```sh
+rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}
+```
+
+また、ロボットが予期しない挙動を起こした場合は、安全に気をつけながらRaspberry Pi Mouse V3のモータ用電源をOFFにしましょう。物理スイッチで電源をOFFにする方法と、コマンド経由でOFFにする2種類の方法があります。いずれかを実施しましょう。
+```sh
+rosservice call /motor_off
+```
 
 <a name="License"></a>
 # License
