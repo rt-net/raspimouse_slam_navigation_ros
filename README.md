@@ -203,6 +203,10 @@ rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}
 rosservice call /motor_off
 ```
 
+### Video
+以下の動画は、実際にRaspberry Pi Mouseがナビゲーション（初期位置の設定や目標位置・姿勢の指示）をしている様子を映しています。  
+[![nav_lds](http://img.youtube.com/vi/xSMtBZYmhFw/sddefault.jpg)](https://youtu.be/xSMtBZYmhFw)
+
 <a name="License"></a>
 # License
 
