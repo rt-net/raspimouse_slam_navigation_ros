@@ -19,7 +19,8 @@ Raspberry Pi MouseでSLAMやナビゲーションを行うためのROSメタパ�
 <a name="Requirements"></a>
 ## Requirements
 Raspberry Pi Mouse V3と開発PCを用意しましょう。  
-ロボットとPCは、同じネットワーク上で同じROS Masterを指定する必要があります。  
+Raspberry Pi Mouse V3にはデバイスドライバをインストールしている必要があります。こちらの[RT Software Turtorials](https://rt-net.github.io/tutorials/raspimouse/products.html)をご参照ください。  
+また、ロボットとRemote PCは、同じネットワーク上で同じROS Masterを指定する必要があります。詳しい設定方法についてはこちらの[RT Software Tutorials](https://rt-net.github.io/tutorials/raspimouse/ros/samples.html#raspberry-pipcros)をご参照ください。  
 以下のリストは、必要なソフトや対応しているセンサなどの一覧を示します。  
 
  - [Raspberry Pi Mouse V3](https://rt-net.jp/products/raspberrypimousev3/)
