@@ -18,7 +18,7 @@ Raspberry Pi MouseでSLAMやナビゲーションを行うためのROSメタパ�
 
 <a name="Requirements"></a>
 ## Requirements
-Raspberry Pi Mouse V3と開発PCを用意しましょう。  
+Raspberry Pi Mouse V3とRemote PCを用意しましょう。  
 Raspberry Pi Mouse V3にはデバイスドライバをインストールしている必要があります。こちらの[RT Software Turtorials](https://rt-net.github.io/tutorials/raspimouse/products.html)をご参照ください。  
 また、ロボットとRemote PCは、同じネットワーク上で同じROS Masterを指定する必要があります。詳しい設定方法についてはこちらの[RT Software Tutorials](https://rt-net.github.io/tutorials/raspimouse/ros/samples.html#raspberry-pipcros)をご参照ください。  
 以下のリストは、必要なソフトや対応しているセンサなどの一覧を示します。  
@@ -76,7 +76,7 @@ source ~/catkin_ws/devel/setup.bash
 ```
 
 ### Remote PC
-以下のコマンドを開発用PC側で実行してインストールを行います。
+以下のコマンドをRemote PC側で実行してインストールを行います。
 ```sh
 cd ~/catkin_ws/src
 # Clone the ROS packages
@@ -139,13 +139,13 @@ roslaunch raspimouse_slam teleop.launch mouse:=false joy:=true joyconfig:=f710
 次のコマンドを実行して、SLAMを開始します。
 RVizが立ち上がり、Raspberry Pi Mouseを動かすと地図が構築されていく様子が見られます。
 
-開発用PC側で起動することを推奨します。この時、開発用PCとRaspberry Pi Mouseが同じネットワーク上で同じROS Masterを指定している必要があります。
+Remote PC側で起動することを推奨します。この時、Remote PCとRaspberry Pi Mouseが同じネットワーク上で同じROS Masterを指定している必要があります。
 
 ```sh
 roslaunch raspimouse_slam raspimouse_slam.launch lds:=true
 ```
 
-地図の保存には次のROSノードを実行します。開発用PC側で起動することを推奨します。
+地図の保存には次のROSノードを実行します。Remote PC側で起動することを推奨します。
 ```sh
 roscd raspimouse_slam/maps
 rosrun map_server map_saver -f $MAP_NAME
@@ -169,7 +169,7 @@ $MAP_NAME.pgm $MAP_NAME.yaml
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/navigating_goalpoint.png width=500 />
 
 ここでは、レーザ測域センサとして[LDS-01](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_5&products_id=3676)を使用しています。  
-また、開発用PCとRaspberry Pi Mouseが同じネットワーク上で同じROS Masterを指定している必要があります。
+また、Raspberry Pi MouseとRemote PCが同じネットワーク上で同じROS Masterを指定している必要があります。
 
 ### Usage
 Raspberry Pi Mouse上で、次のコマンドを実行します。Raspberry Pi MouseのモータとLIDARを起動するためのノードを起動しています。
@@ -177,7 +177,7 @@ Raspberry Pi Mouse上で、次のコマンドを実行します。Raspberry Pi M
 roslaunch raspimouse_navigation robot_navigation.launch lds:=true port:=/dev/ttyUSB0
 ```
 
-開発用のパソコン上で、次のコマンドを実行します。自己位置推定と経路生成用のノードを起動し、RVizを立ち上げます。（下記画像を参照）  
+Remote PC上で、次のコマンドを実行します。自己位置推定と経路生成用のノードを起動し、RVizを立ち上げます。（下記画像を参照）  
 `map_file`パラメータがあるので、随時環境に合わせて変更をしてください。
 ```sh
 roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
