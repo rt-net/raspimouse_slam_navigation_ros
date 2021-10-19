@@ -165,29 +165,30 @@ $MAP_NAME.pgm $MAP_NAME.yaml
 
 <a name="raspimouse_navigation"></a>
 ## raspimouse_navigation
-このパッケージはamclとmove_baseを利用しています。予め作られた地図と周辺環境の情報から自己位置推定を行い、地図上の任意の座標まで自律移動を行うことができます。  
+SLAMで地図を生成した後、その地図を使って自己位置推定を行い、地図上の任意の座標まで自律移動を行います。  
+このパッケージは[amcl](http://wiki.ros.org/amcl)と[move_base](http://wiki.ros.org/move_base)を使用しています。予め作られた地図と周辺環境の情報から自己位置推定を行い、地図上の任意の座標まで自律移動を行うことができます。  
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/navigating_goalpoint.png width=500 />
 
 ここでは、レーザ測域センサとして[LDS-01](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_5&products_id=3676)を使用しています。  
 また、Raspberry Pi MouseとRemote PCが同じネットワーク上で同じROS Masterを指定している必要があります。
 
 ### Usage
-Raspberry Pi Mouse上で、次のコマンドを実行します。Raspberry Pi MouseのモータとLiDARを起動するためのノードを起動しています。
+まずはRaspberry Pi Mouse上で、次のコマンドを実行します。Raspberry Pi MouseのモータとLiDARを起動するためのノードを起動しています。
 ```sh
 roslaunch raspimouse_navigation robot_navigation.launch lds:=true port:=/dev/ttyUSB0
 ```
 
 Remote PC上で、次のコマンドを実行します。自己位置推定と経路生成用のノードを起動し、RVizを立ち上げます。（下記画像を参照）  
-`map_file`パラメータがあるので、随時環境に合わせて変更をしてください。
+引数のmap_fileパラメータには、SLAMで生成した地図（yamlファイル）を指定してください。
 ```sh
 roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
 ```
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/navigation_afterlaunched.png width=500 />  
 
-無事RVizが起動したら、まずは初期位置・姿勢を合わせます。RVizの画面上部の緑色の矢印*2D Pose Estimate*をクリックしましょう。地図上で、ロボット実機が最もらしい位置までマウスを持ってきてクリックし**そのままホールド**します。大きな矢印が出ている状態で、マウスを動かすと向きを指示することが可能なので、最もらしい向きに合わせてから、マウスを離しましょう。  
+無事RVizが起動したら、まずは初期位置・姿勢を合わせます。RVizの画面上部の緑色の矢印*2D Pose Estimate*をクリックしましょう。地図上で、ロボット実機が最もらしい位置までマウスを持ってきてクリックし**そのままホールド**します。大きな矢印が出ている状態で、マウスを動かすと向きを指示することが可能なので、最もらしい向きに合わせてから、ボタンを離しましょう。  
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/navigation_setting_initialpose.gif width=500 />
 
-初期位置・姿勢の指示が完了したら、次は目標位置・姿勢を指示します。RVizの画面上部の紫色の矢印*2D Nav Goal*をクリックしましょう。地図上で、初期位置・姿勢を合わせた時と同様に、地図上をクリックして位置を、ホールドしたままマウスを動かして向きを指示しましょう。すると、ロボットが自律移動を開始します。  
+初期位置・姿勢の指示が完了したら、次は目標位置・姿勢を指示します。RVizの画面上部の紫色の矢印*2D Nav Goal*をクリックしましょう。地図上で、初期位置・姿勢を合わせた時と同様に、地図上をクリックして目標位置を、ホールドしたままマウスを動かして目標姿勢を指示しましょう。すると、ロボットが自律移動を開始します。  
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/navigation_setting_goalpose.gif width=500 />
 
 ### Stopping the Robot
@@ -198,7 +199,7 @@ rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}
 
 また、ロボットが予期しない挙動をした場合は、安全に気をつけながらRaspberry Pi Mouse V3のモータ用電源をOFFにしましょう。
 モータ用電源はRaspberry Pi Mouse V3に搭載されたスイッチでON / OFFできます。
-次のコマンドを実行すると、ソフトウェアスイッチでモータ電源をOFFにできます。
+あるいは、次のコマンドを実行すると、ソフトウェアスイッチでモータ電源をOFFにできます。
 ```sh
 rosservice call /motor_off
 ```
