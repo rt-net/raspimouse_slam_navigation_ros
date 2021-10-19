@@ -119,13 +119,13 @@ rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}
 ---
 <a name="raspimouse_slam"></a>
 ## raspimouse_slam
-LIDARを使ってSLAM（自己位置推定と地図生成）を行うパッケージです。  
+LiDARを使ってSLAM（自己位置推定と地図生成）を行うパッケージです。  
 <img src=https://rt-net.github.io/images/raspberry-pi-mouse/slam_gmapping.png width=500 />
 
 ここでは、レーザ測域センサとして[LDS-01](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_5&products_id=3676)、コントローラとして[Logicool Wireless Gamepad F710](https://gaming.logicool.co.jp/ja-jp/products/gamepads/f710-wireless-gamepad.html#940-0001440)を使用しています。
 
 ### Usage
-Raspberry Pi Mouse上で、次のコマンドを実行します。LIDARなどを起動します。
+Raspberry Pi Mouse上で、次のコマンドを実行します。LiDARなどを起動します。
 ```sh
 roslaunch raspimouse_slam robot_bringup.launch lds:=true port:=/dev/ttyUSB0
 ```
@@ -172,7 +172,7 @@ $MAP_NAME.pgm $MAP_NAME.yaml
 また、Raspberry Pi MouseとRemote PCが同じネットワーク上で同じROS Masterを指定している必要があります。
 
 ### Usage
-Raspberry Pi Mouse上で、次のコマンドを実行します。Raspberry Pi MouseのモータとLIDARを起動するためのノードを起動しています。
+Raspberry Pi Mouse上で、次のコマンドを実行します。Raspberry Pi MouseのモータとLiDARを起動するためのノードを起動しています。
 ```sh
 roslaunch raspimouse_navigation robot_navigation.launch lds:=true port:=/dev/ttyUSB0
 ```
