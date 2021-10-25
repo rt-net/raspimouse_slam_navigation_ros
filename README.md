@@ -151,7 +151,7 @@ roscd raspimouse_slam/maps
 rosrun map_server map_saver -f $MAP_NAME
 ```
 
-`pgm`と`yaml`の2つのファイルが生成されています。
+`.pgm`と`.yaml`の2つのファイルが生成されています。
 ```sh
 ~/catkin_ws/raspimouse_slam_navigation_ros/raspimouse_slam/maps$ ls
 $MAP_NAME.pgm $MAP_NAME.yaml
@@ -179,7 +179,7 @@ roslaunch raspimouse_navigation robot_navigation.launch lds:=true port:=/dev/tty
 ```
 
 Remote PC上で、次のコマンドを実行します。自己位置推定と経路生成用のノードを起動し、RVizを立ち上げます。（下記画像を参照）  
-引数のmap_fileパラメータには、SLAMで生成した地図（yamlファイル）を指定してください。
+引数のmap_fileパラメータには、SLAMで生成した地図（.yamlファイル）を指定してください。
 ```sh
 roslaunch raspimouse_navigation pc_navigation.launch map_file:=$(rospack find raspimouse_slam)/maps/$MAP_NAME.yaml
 ```
