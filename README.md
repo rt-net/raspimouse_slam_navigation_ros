@@ -1,5 +1,6 @@
 # raspimouse_slam_navigation
-Raspberry Pi MouseでSLAMやナビゲーションを行うためのROSメタパッケージです。
+Raspberry Pi MouseでSLAMやナビゲーションを行うためのROSメタパッケージです。  
+その他のRaspberry Pi MouseのROSサンプル集は[rt-net/raspimouse_ros_examples](https://github.com/rt-net/raspimouse_ros_examples)で紹介しています。
 
 現在、以下のROSのディストリビューションに対応しております。
 
