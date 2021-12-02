@@ -8,7 +8,7 @@ Raspberry Pi MouseでSLAMやナビゲーションを行うためのROSメタパ�
 - Noetic ([`noetic-devel`](https://github.com/rt-net/raspimouse_slam_navigation_ros/tree/noetic-devel))
 
 ---
-# Table of Concents
+# Table of Contents
  - [Requirements](#Requirements)
  - [Installation](#Installation)
  - [QuickStart](#QuickStart)
